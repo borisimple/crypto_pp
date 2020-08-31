@@ -13,12 +13,8 @@ class MyStreamListener(tweepy.StreamListener):
         predict_price(self, tweet)
 
     def on_error(self, status):
-        bot_msg(f"PP failed because of: {status}")
+        bot_msg(f"PP failed because of status: {status}")
         return False
-
-    def find_coin(self, text):
-        splited_text = text.split(' ')
-        return splited_text[splited_text.index('in') + 1][1:]
 
 
 def main():
