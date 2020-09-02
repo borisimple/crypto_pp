@@ -1,7 +1,7 @@
 import os
 import tweepy
 from tel_bot import bot_msg
-from coin_price import predict_price
+from coin_price import predict_price, logger
 
 
 class MyStreamListener(tweepy.StreamListener):
@@ -10,9 +10,12 @@ class MyStreamListener(tweepy.StreamListener):
         self.me = api.me()
 
     def on_status(self, tweet):
+        if tweet.in_reply_to_status_id is not None or tweet.user.id == self.me.id:
+            return
         predict_price(self, tweet)
 
     def on_error(self, status):
+        logger.error(status)
         bot_msg(f"PP failed because of status: {status}")
         return False
 
