@@ -50,6 +50,4 @@ def predict_price(account, from_tweet):
 
 
 def find_coin(from_text):
-    # splited_from_text = text.split(' ')
-    # return splited_text[splited_text.index('in') + 1][1:]
-    return re.search('(\$[A-Z])\w+', from_text)
+    return re.search('(\$[A-Z])\w+', from_text).group()[1:]
