@@ -23,6 +23,9 @@ def predict_price(account, from_tweet):
         Subject to a dynamic change.
     '''
 
+    if from_tweet.text[0:2] == 'RT':
+        return "Skipping retweet"
+
     if not from_tweet.favorited:
         try:
             from_tweet.favorite()
