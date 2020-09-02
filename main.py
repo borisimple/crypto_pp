@@ -10,7 +10,8 @@ class MyStreamListener(tweepy.StreamListener):
         self.me = api.me()
 
     def on_status(self, tweet):
-        if tweet.in_reply_to_status_id is not None or tweet.user.id == self.me.id:
+
+        if not correct_tweet(self, tweet):
             return
         predict_price(self, tweet)
 
@@ -18,6 +19,18 @@ class MyStreamListener(tweepy.StreamListener):
         logger.error(status)
         bot_msg(f"PP failed because of status: {status}")
         return False
+
+
+def correct_tweet(account, tweet_text):
+    if tweet_text.in_reply_to_status_id is not None \
+            or tweet_text.in_reply_to_user_id is not None \
+            or tweet_text.is_quote_status is True \
+            or tweet_text.user.id_str != os.getenv('ACC_ID') \
+            or tweet_text.user.id == account.me.id \
+            or not tweet_text.text.startswith('Predict and win'):
+        return False
+
+    return True
 
 
 def main():
@@ -32,8 +45,8 @@ def main():
 
     contest_listener = MyStreamListener(api)
     stream = tweepy.Stream(auth=api.auth, listener=contest_listener)
-    stream.filter(follow=['1299989040700297216'])
-    stream.filter(track=["Predict and win"])
+    stream.filter(follow=[os.getenv('ACC_ID')])
+    stream.filter(track=["Predict and win"], languages=["en"])
 
 
 if __name__ == "__main__":
