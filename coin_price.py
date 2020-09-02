@@ -1,8 +1,7 @@
-from logging import Logger
 import requests as r
-import tweepy
 from tel_bot import bot_msg
 import logging
+import re
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger()
@@ -50,6 +49,7 @@ def predict_price(account, from_tweet):
         bot_msg(f"Failed to retweet with comment!")
 
 
-def find_coin(text):
-    splited_text = text.split(' ')
-    return splited_text[splited_text.index('in') + 1][1:]
+def find_coin(from_text):
+    # splited_from_text = text.split(' ')
+    # return splited_text[splited_text.index('in') + 1][1:]
+    return re.search('(\$[A-Z])\w+', from_text)
