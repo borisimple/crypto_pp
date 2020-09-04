@@ -21,6 +21,9 @@ def predict_price(account, from_tweet):
     '''
         "Prediction" will be a static +8% on the current price.
         Subject to a dynamic change.
+
+        Update: + 80% will be added to the next prediction
+        on 4 September because of the recent crash!
     '''
 
     if from_tweet.text[0:2] == 'RT':
@@ -41,7 +44,7 @@ def predict_price(account, from_tweet):
     coin_from_tweet = find_coin(from_tweet.text)
     current_coin_price = get_current_price(coin_from_tweet)
     predicted_price = round(
-        current_coin_price + current_coin_price * 0.08, no_of_decimals(current_coin_price))
+        current_coin_price + current_coin_price * 0.8, no_of_decimals(current_coin_price))
     try:
         account.api.update_status(
             f"${predicted_price}", in_reply_to_status_id=from_tweet.id, auto_populate_reply_metadata=True)
