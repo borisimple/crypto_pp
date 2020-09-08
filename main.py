@@ -45,7 +45,7 @@ def main():
 
     contest_listener = MyStreamListener(api)
     stream = tweepy.Stream(auth=api.auth, listener=contest_listener)
-    stream.filter(follow=['1299989040700297216'])
+    stream.filter(follow=[os.getenv('ACC_ID')])
     stream.filter(track=["Predict and win"], languages=["en"])
 
 
