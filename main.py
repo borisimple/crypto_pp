@@ -16,8 +16,8 @@ class MyStreamListener(tweepy.StreamListener):
         predict_price(self, tweet)
 
     def on_error(self, status):
-        bot_msg(f'PP error: {status}')
         logger.error(status)
+        bot_msg(f"PP failed because of status: {status}")
         return False
 
 
