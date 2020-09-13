@@ -2,7 +2,7 @@ import os
 import firebase_admin
 from firebase_admin import credentials, firestore
 
-cred = credentials.Certificate(os.getenv('GOOGLE_APPLICATION_CREDENTIALS'))
+cred = credentials.Certificate(os.getenv('GOOGLE_CREDENTIALS'))
 firebase_admin.initialize_app(cred, {
     'projectId': os.getenv('FIREBASE_PROJECT_ID'),
 })
