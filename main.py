@@ -27,7 +27,7 @@ def correct_tweet(account, tweet_text: str) -> bool:
     if tweet_text.in_reply_to_status_id is not None \
             or tweet_text.in_reply_to_user_id is not None \
             or tweet_text.is_quote_status is True \
-            or tweet_text.user.id_str != os.getenv('ACC_ID') \
+            or tweet_text.user.id_str != test_user \
             or tweet_text.user.id == account.me.id \
             or not tweet_text.text.startswith('Predict and win'):
         return False
@@ -47,7 +47,7 @@ def main():
 
     contest_listener = MyStreamListener(api)
     stream = tweepy.Stream(auth=api.auth, listener=contest_listener)
-    stream.filter(follow=[os.getenv('ACC_ID')])
+    stream.filter(follow=[test_user])
     stream.filter(track=["Predict and win"], languages=["en"])
 
 
