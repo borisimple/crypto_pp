@@ -12,3 +12,4 @@ six==1.15.0
 toml==0.10.1
 tweepy==3.9.0
 urllib3==1.25.10
+firebase-admin==4.3.0
