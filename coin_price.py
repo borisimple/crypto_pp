@@ -18,7 +18,7 @@ def no_of_decimals(price: float) -> int:
     return 2 if price > 1 else 5
 
 
-def predict_price(account, from_tweet: str) -> None:
+def predict_price(account, from_tweet) -> None:
     '''
         Prediction % will be retrieved from
         firebase and added to the current price.
@@ -26,7 +26,7 @@ def predict_price(account, from_tweet: str) -> None:
     '''
 
     if from_tweet.text[0:2] == 'RT':
-        return "Skipping retweet"
+        return
 
     if not from_tweet.favorited:
         try:
@@ -54,5 +54,5 @@ def predict_price(account, from_tweet: str) -> None:
         bot_msg(f"Failed to retweet with comment!")
 
 
-def find_coin(from_text: str) -> str:
+def find_coin(from_text: str):
     return re.search('(\$[A-Z])\w+', from_text).group()[1:]

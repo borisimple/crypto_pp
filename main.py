@@ -21,7 +21,7 @@ class MyStreamListener(tweepy.StreamListener):
         return False
 
 
-def correct_tweet(account, tweet_text: str) -> bool:
+def correct_tweet(account, tweet_text) -> bool:
     if tweet_text.in_reply_to_status_id is not None \
             or tweet_text.in_reply_to_user_id is not None \
             or tweet_text.is_quote_status is True \
