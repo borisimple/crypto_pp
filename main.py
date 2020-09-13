@@ -3,7 +3,6 @@ import tweepy
 from tel_bot import bot_msg
 from coin_price import predict_price, logger
 
-
 class MyStreamListener(tweepy.StreamListener):
     def __init__(self, api):
         self.api = api

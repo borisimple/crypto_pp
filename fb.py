@@ -1,8 +1,15 @@
-import os
+import os, json
 import firebase_admin
 from firebase_admin import credentials, firestore
 
-cred = credentials.Certificate(os.getenv('GOOGLE_CREDENTIALS'))
+cert = {
+    "type": "service_account",
+    "token_uri": "https://oauth2.googleapis.com/token",
+    "private_key": os.getenv('FIREBASE_PRIVATE_KEY').replace('\\n', '\n'),
+    "client_email": os.getenv('FIREBASE_CLIENT_EMAIL')
+}
+
+cred = credentials.Certificate(cert=cert)
 firebase_admin.initialize_app(cred, {
     'projectId': os.getenv('FIREBASE_PROJECT_ID'),
 })
