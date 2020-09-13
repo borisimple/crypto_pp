@@ -11,6 +11,6 @@ firebase_admin.initialize_app(cred, {
 db = firestore.client()
 
 
-def get_pct_from_fb() -> int:
+def get_pct_from_fb() -> float:
     percentage = db.collection(u'prediction').limit(1).get()
-    return int(percentage[0].to_dict()['percentage'])
+    return float(percentage[0].to_dict()['percentage']) / 100
