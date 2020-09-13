@@ -17,7 +17,7 @@ class MyStreamListener(tweepy.StreamListener):
 
     def on_error(self, status):
         logger.error(status)
-        bot_msg(f"PP failed because of status: {status}")
+        bot_msg(f'PP error: {status}')
         return False
 
 
